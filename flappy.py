@@ -23,7 +23,7 @@ class FlappyBirdWindow(arcade.Window):
 	def __init__(self, width, height):
 		super().__init__(width, height)
 
-		arcade.set_background_color(arcade.color.CAROLINA_BLUE)
+		arcade.set_background_color(arcade.color.BRICK_RED)
 
 		self.world = World(SCREEN_WIDTH, SCREEN_HEIGHT)
 
@@ -37,6 +37,9 @@ class FlappyBirdWindow(arcade.Window):
 
 		self.bird_sprite.draw()
 	
+	def on_key_press(self, key, key_modifiers):
+		self.world.on_key_press(key, key_modifiers)
+
 if __name__ == '__main__':
 	window = FlappyBirdWindow(SCREEN_WIDTH, SCREEN_HEIGHT)
 	arcade.run()
