@@ -7,9 +7,9 @@ SCREEN_WIDTH = 900
 SCREEN_HEIGHT = 500
 
 class ModelSprite(arcade.Sprite):
+
 	def __init__(self, *args, **kwargs):
 		self.model = kwargs.pop('model', None)
-		
 		super().__init__(*args, **kwargs)
 
 	def sync_with_model(self):
@@ -25,9 +25,7 @@ class FlappyBirdWindow(arcade.Window):
 		super().__init__(width, height)
 
 		arcade.set_background_color(arcade.color.BRICK_RED)
-
 		self.world = World(SCREEN_WIDTH, SCREEN_HEIGHT)
-
 		self.bird_sprite = ModelSprite('images/MomBird.png', model=self.world.bird)
 
 	def animate(self, delta):
@@ -41,13 +39,12 @@ class FlappyBirdWindow(arcade.Window):
 										 arcade.color.SPANISH_GRAY)
 
 	def on_draw(self):
+
 		arcade.set_viewport(self.world.bird.x - SCREEN_WIDTH/2,
 						    self.world.bird.x + SCREEN_WIDTH/2,
 							0,SCREEN_HEIGHT)
-
 		arcade.start_render()
 		self.draw_walls()
-
 		self.bird_sprite.draw()
 
 		if not self.world.bird.is_touch:
@@ -55,8 +52,8 @@ class FlappyBirdWindow(arcade.Window):
 
 		else:
 			arcade.draw_text("YOUR TOTAL Score : "+str(self.world.score), self.world.bird.x + (SCREEN_WIDTH // 2) - 680, self.height -100, arcade.color.BLACK, 30)
-			arcade.draw_text(">>GameOver<<", self.world.bird.x + (SCREEN_WIDTH // 2) - 800, self.height -300, arcade.color.BLACK, 60)
 
+			arcade.draw_text(">>GameOver<<", self.world.bird.x + (SCREEN_WIDTH // 2) - 800, self.height -300, arcade.color.BLACK, 60)
 
 		gl.glDisable(gl.GL_TEXTURE_2D)
 	

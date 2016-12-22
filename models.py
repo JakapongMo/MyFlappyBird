@@ -1,5 +1,4 @@
 import arcade.key
-
 from random import randint
 
 GRAVITY = -2
@@ -21,7 +20,6 @@ class Bird(Model):
 
 		self.is_jump = False
 		self.is_touch =False
-
 		self.base_y = base_y
 
 	def jump(self):
@@ -41,12 +39,10 @@ class Bird(Model):
 		
 
 	def animate(self, delta):
-
 		if self.vx < MAX_VX:
 			self.vx += ACCX
-			
-
 		self.touch()
+
 		if self.is_touch == True:
 			self.y -= 10
 
@@ -70,15 +66,12 @@ class Walls:
 		self.width = width
 		self.height = height
         
-
 class World:
 	def __init__(self, width, height):
 		self.width = width
 		self.height = height
-
 		self.score = 0
 		self.bird = Bird(self, 0 ,300, 0)
-
 		self.walls =[]
 		init = 150
 			
@@ -90,7 +83,6 @@ class World:
 		self.walls.append(Walls(self, 15150, 900, 50, 10000))
 		self.walls.append(Walls(self, 15150, 600, 50, 400))
 
-		
 	def animate(self, delta):
 		self.bird.animate(delta)
 		if self.bird.x %49 == 0:
@@ -100,4 +92,3 @@ class World:
 	def on_key_press(self, key, key_modifiers):
 		if key == arcade.key.SPACE:
 			self.bird.jump()
-
