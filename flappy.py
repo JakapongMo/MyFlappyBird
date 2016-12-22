@@ -38,7 +38,7 @@ class FlappyBirdWindow(arcade.Window):
 		for w in walls:
 			arcade.draw_rectangle_filled(w.x + w.width/2 , w.y - w.height/2,
 							             w.width, w.height,
-										 arcade.color.WHITE)
+										 arcade.color.SPANISH_GRAY)
 
 	def on_draw(self):
 		arcade.set_viewport(self.world.bird.x - SCREEN_WIDTH/2,
@@ -50,12 +50,14 @@ class FlappyBirdWindow(arcade.Window):
 
 		self.bird_sprite.draw()
 
-		arcade.draw_text("Score:"+str(self.world.score), self.world.bird.x + (SCREEN_WIDTH // 2) - 890, self.height -30, arcade.color.WHITE, 20)
+		arcade.draw_text("Score:"+str(self.world.score), self.world.bird.x + (SCREEN_WIDTH // 2) - 890, self.height -30, arcade.color.BLACK, 20)
 
 		gl.glDisable(gl.GL_TEXTURE_2D)
 	
 	def on_key_press(self, key, key_modifiers):
 		self.world.on_key_press(key, key_modifiers)
+
+
 
 if __name__ == '__main__':
 	window = FlappyBirdWindow(SCREEN_WIDTH, SCREEN_HEIGHT)

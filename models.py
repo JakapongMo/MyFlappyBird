@@ -46,8 +46,6 @@ class Bird(Model):
 			self.vx += ACCX
 			
 
-#	if self.x >= self.world.width:
-#			self.x = 0
 		self.touch()
 		if self.is_touch == True:
 			self.y -= 10
@@ -89,14 +87,15 @@ class World:
 			self.walls.append(Walls(self, init, randint(180,280), 50,600))
 			init += 150
 		
-#		self.walls.append(Walls(self, 400, 900, 50, 600))
-#		self.walls.append(Walls(self, 400, 150, 50, 400))
+		self.walls.append(Walls(self, 15150, 900, 50, 600))
+		self.walls.append(Walls(self, 15150, 600, 50, 400))
 
 		
 	def animate(self, delta):
 		self.bird.animate(delta)
 		if self.bird.x %49 == 0:
-			self.score += 1
+			if not self.bird.is_touch:
+  				self.score += 1
 	
 	def on_key_press(self, key, key_modifiers):
 		if key == arcade.key.SPACE:
