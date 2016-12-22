@@ -3,7 +3,7 @@ import arcade.key
 GRAVITY = -2
 MAX_VX = 3
 ACCX = 1
-JUMP_VY = 25
+JUMP_VY = 13
 class Model:
 	def __init__(self, world, x, y, angle):
 		self.world = world
@@ -18,6 +18,7 @@ class Bird(Model):
 		self.vy = 0
 
 		self.is_jump = False
+		self.is_touch =False
 
 		self.base_y = base_y
 
@@ -26,25 +27,38 @@ class Bird(Model):
 			self.is_jump = True
 			self.vy = JUMP_VY
 			self.count = 0
+
+	def touch(self):
+		walls = self.world.walls
+		for w in walls:
+			if self.x >=  w.x and self.x <= w.x+w.width:
+				if self.y >= w.y-w.height and self.y <= w.y:
+					self.is_touch = True
+					
+		
 		
 
 	def animate(self, delta):
 
 		if self.vx < MAX_VX:
 			self.vx += ACCX
+			
 
-		if self.x >= self.world.width:
-			self.x = 0
+#	if self.x >= self.world.width:
+#			self.x = 0
+		self.touch()
+		if self.is_touch == True:
+			self.y -= 10
 
 		self.x += self.vx
-		self.y += -2
+		self.y += -1
 
 		if self.is_jump:
 			self.y += self.vy
 			self.vy = self.vy + GRAVITY
 			self.count += 1
 
-			if self.count == 20:
+			if self.count == 10:
 				self.vy =0
 				self.is_jump = False
 
@@ -55,19 +69,30 @@ class Walls:
 		self.y = y
 		self.width = width
 		self.height = height
-
+        
 
 class World:
 	def __init__(self, width, height):
 		self.width = width
 		self.height = height
 
-		self.bird = Bird(self, 0 ,300, 0)
+		self.bird = Bird(self, -100 ,300, 0)
 
 		self.walls =[]
 
-		self.walls.append(Walls(self, 600, 100, 50, 600))
+		self.walls.append(Walls(self, 0, 900, 50, 600))
 		self.walls.append(Walls(self, 0, 150, 50, 400))
+
+
+		self.walls.append(Walls(self, 100, 900, 50, 500))
+		self.walls.append(Walls(self, 100, 150, 50, 600))
+
+		self.walls.append(Walls(self, 300, 900, 50, 600))
+		self.walls.append(Walls(self, 350, 150, 50, 400))
+
+		self.walls.append(Walls(self, 600, 900, 50, 600))
+		self.walls.append(Walls(self, 600, 150, 50, 400))
+
 	def animate(self, delta):
 		self.bird.animate(delta)
 	
