@@ -1,10 +1,9 @@
 import arcade.key
 
 GRAVITY = -2
-MAX_VX = 3
+MAX_VX = 1
 ACCX = 1
-JUMP_VY = 30
-
+JUMP_VY = 25
 class Model:
 	def __init__(self, world, x, y, angle):
 		self.world = world
@@ -26,9 +25,10 @@ class Bird(Model):
 		if not self.is_jump:
 			self.is_jump = True
 			self.vy = JUMP_VY
+			self.count = 0
+		
 
 	def animate(self, delta):
-		self.y += GRAVITY
 
 		if self.vx < MAX_VX:
 			self.vx += ACCX
@@ -37,15 +37,20 @@ class Bird(Model):
 			self.x = 0
 
 		self.x += self.vx
+		self.y += -3
 
 		if self.is_jump:
 			self.y += self.vy
-			self.is_jump = False
+			self.vy = self.vy + GRAVITY
+			self.count += 1
 
-			if self.y <= self.base_y:
-				self.y = self.base_y
+			if self.count == 20:
 				self.vy =0
-#self.is_jump = False
+				self.is_jump = False
+#if self.y <= self.base_y:
+#				self.y = self.base_y
+#				self.vy = 0
+#				self.is_jump =False
 
 class World:
 	def __init__(self, width, height):
