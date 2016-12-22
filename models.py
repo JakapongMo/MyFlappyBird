@@ -87,7 +87,7 @@ class World:
 			self.walls.append(Walls(self, init, randint(180,280), 50,600))
 			init += 150
 		
-		self.walls.append(Walls(self, 15150, 900, 50, 600))
+		self.walls.append(Walls(self, 15150, 900, 50, 10000))
 		self.walls.append(Walls(self, 15150, 600, 50, 400))
 
 		

@@ -50,7 +50,13 @@ class FlappyBirdWindow(arcade.Window):
 
 		self.bird_sprite.draw()
 
-		arcade.draw_text("Score:"+str(self.world.score), self.world.bird.x + (SCREEN_WIDTH // 2) - 890, self.height -30, arcade.color.BLACK, 20)
+		if not self.world.bird.is_touch:
+			arcade.draw_text("Score:"+str(self.world.score), self.world.bird.x + (SCREEN_WIDTH // 2) - 890, self.height -30, arcade.color.BLACK, 20)
+
+		else:
+			arcade.draw_text("YOUR TOTAL Score : "+str(self.world.score), self.world.bird.x + (SCREEN_WIDTH // 2) - 680, self.height -100, arcade.color.BLACK, 30)
+			arcade.draw_text(">>GameOver<<", self.world.bird.x + (SCREEN_WIDTH // 2) - 800, self.height -300, arcade.color.BLACK, 60)
+
 
 		gl.glDisable(gl.GL_TEXTURE_2D)
 	
