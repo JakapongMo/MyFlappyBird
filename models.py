@@ -1,5 +1,7 @@
 import arcade.key
 
+from random import randint
+
 GRAVITY = -2
 MAX_VX = 3
 ACCX = 1
@@ -79,20 +81,27 @@ class World:
 		self.bird = Bird(self, -100 ,300, 0)
 
 		self.walls =[]
+		init = 100
+			
+		for i in range(1,100):
+			self.walls.append(Walls(self, init, 900, 50, randint(500,600)))
+			self.walls.append(Walls(self, init, randint(180,280), 50,600))
+			init += 130
+		
 
-		self.walls.append(Walls(self, 0, 900, 50, 600))
-		self.walls.append(Walls(self, 0, 150, 50, 400))
+#self.walls.append(Walls(self, 0, 150, 50, 400))
 
+#
+#		self.walls.append(Walls(self, 100, 900, 50, 500))
+#		self.walls.append(Walls(self, 100, 150, 50, 600))
+#
+#self.walls.append(Walls(self, 250, 900, 50, 600))
+#		self.walls.append(Walls(self, 250, 150, 50, 400))
+#
+#		self.walls.append(Walls(self, 400, 900, 50, 600))
+#		self.walls.append(Walls(self, 400, 150, 50, 400))
 
-		self.walls.append(Walls(self, 100, 900, 50, 500))
-		self.walls.append(Walls(self, 100, 150, 50, 600))
-
-		self.walls.append(Walls(self, 300, 900, 50, 600))
-		self.walls.append(Walls(self, 350, 150, 50, 400))
-
-		self.walls.append(Walls(self, 600, 900, 50, 600))
-		self.walls.append(Walls(self, 600, 150, 50, 400))
-
+		
 	def animate(self, delta):
 		self.bird.animate(delta)
 	
