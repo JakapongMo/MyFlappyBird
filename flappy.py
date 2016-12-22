@@ -1,6 +1,7 @@
 import arcade
 
 from models import World, Bird
+import pyglet.gl as gl
 
 SCREEN_WIDTH = 900
 SCREEN_HEIGHT = 500
@@ -32,14 +33,29 @@ class FlappyBirdWindow(arcade.Window):
 	def animate(self, delta):
 		self.world.animate(delta)
 
+	def draw_walls(self):
+		walls = self.world.walls
+		for w in walls:
+			arcade.draw_rectangle_filled(w.x + w.width/2 , w.y - w.height/2,
+							             w.width, w.height,
+										 arcade.color.WHITE)
+
 	def on_draw(self):
+		arcade.set_viewport(self.world.bird.x - SCREEN_WIDTH/2,
+						    self.world.bird.x + SCREEN_WIDTH/2,
+							0,SCREEN_HEIGHT)
+
 		arcade.start_render()
+		self.draw_walls()
 
 		self.bird_sprite.draw()
+
+		gl.glDisable(gl.GL_TEXTURE_2D)
 	
 	def on_key_press(self, key, key_modifiers):
 		self.world.on_key_press(key, key_modifiers)
 
 if __name__ == '__main__':
 	window = FlappyBirdWindow(SCREEN_WIDTH, SCREEN_HEIGHT)
+	arcade.set_window(window)
 	arcade.run()
