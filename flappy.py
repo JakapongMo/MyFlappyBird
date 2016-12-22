@@ -50,6 +50,8 @@ class FlappyBirdWindow(arcade.Window):
 
 		self.bird_sprite.draw()
 
+		arcade.draw_text("Score:"+str(self.world.score), self.world.bird.x + (SCREEN_WIDTH // 2) - 890, self.height -30, arcade.color.WHITE, 20)
+
 		gl.glDisable(gl.GL_TEXTURE_2D)
 	
 	def on_key_press(self, key, key_modifiers):
