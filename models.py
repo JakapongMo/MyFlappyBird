@@ -4,7 +4,7 @@ from random import randint
 GRAVITY = -2
 MAX_VX = 3
 ACCX = 1
-JUMP_VY = 13
+JUMP_VY = 17
 class Model:
 	def __init__(self, world, x, y, angle):
 		self.world = world
@@ -54,7 +54,7 @@ class Bird(Model):
 			self.vy = self.vy + GRAVITY
 			self.count += 1
 
-			if self.count == 10:
+			if self.count == 15:
 				self.vy =0
 				self.is_jump = False
 

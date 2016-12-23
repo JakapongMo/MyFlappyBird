@@ -60,8 +60,7 @@ class FlappyBirdWindow(arcade.Window):
 	def on_key_press(self, key, key_modifiers):
 		self.world.on_key_press(key, key_modifiers)
 
-
-
+		
 if __name__ == '__main__':
 	window = FlappyBirdWindow(SCREEN_WIDTH, SCREEN_HEIGHT)
 	arcade.set_window(window)
